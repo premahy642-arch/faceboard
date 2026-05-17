@@ -1,165 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-    <meta name="viewport"
-    content="width=device-width, initial-scale=1.0">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Face Analyzer</title>
-
-    <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-
         *{
             margin:0;
             padding:0;
             box-sizing:border-box;
-            font-family:Arial;
+            font-family:Arial, sans-serif;
         }
-
         body{
-
-            background:
-            radial-gradient(circle at top,
-            #111827,
-            #020617 60%);
-
+            background: radial-gradient(circle at top, #111827, #020617 60%);
             min-height:100vh;
             color:white;
             overflow-x:hidden;
-
         }
-
         /* NAVBAR */
-
         .navbar{
-
             width:100%;
             padding:25px 50px;
             display:flex;
             justify-content:center;
             align-items:center;
-            border-bottom:
-            1px solid rgba(255,255,255,0.08);
-
+            border-bottom: 1px solid rgba(255,255,255,0.08);
             background:#050816;
-
         }
-
         .logo{
-
             font-size:45px;
             font-weight:bold;
-
-            background:
-            linear-gradient(to right,
-            #00c6ff,
-            #ff00ff);
-
+            background: linear-gradient(to right, #00c6ff, #ff00ff);
             -webkit-background-clip:text;
             -webkit-text-fill-color:transparent;
-
             text-align:center;
-
         }
-
-        /* MAIN */
-
+        /* MAIN CONTAINER */
         .container{
-
             width:95%;
             margin:auto;
             padding:40px 0;
-
         }
-
         .main-grid{
-
             display:grid;
             grid-template-columns:320px 1fr 260px;
             gap:25px;
-
         }
-
         /* LEFT PANEL */
-
         .left-panel{
-
             background:#081120;
             border-radius:25px;
             padding:30px;
-
-            border:
-            1px solid rgba(255,255,255,0.08);
-
-            box-shadow:
-            0px 0px 25px rgba(0,0,0,0.5);
-
+            border: 1px solid rgba(255,255,255,0.08);
+            box-shadow: 0px 0px 25px rgba(0,0,0,0.5);
         }
-
         .panel-title{
-
             text-align:center;
             font-size:30px;
             margin-bottom:30px;
-
         }
-
         .upload-box{
-
-            border:
-            2px dashed #ff00ff;
-
+            border: 2px dashed #ff00ff;
             border-radius:25px;
-
             padding:40px 20px;
-
             text-align:center;
-
             background:#0b1527;
-
         }
-
         .upload-box i{
-
             font-size:65px;
             color:#8b5cf6;
             margin-bottom:20px;
-
             animation:float 2s infinite ease-in-out;
-
         }
-
         @keyframes float{
-
-            0%{
-                transform:translateY(0px);
-            }
-
-            50%{
-                transform:translateY(-10px);
-            }
-
-            100%{
-                transform:translateY(0px);
-            }
-
+            0%, 100%{ transform:translateY(0px); }
+            50%{ transform:translateY(-10px); }
         }
-
         .upload-box p{
-
             margin-bottom:18px;
             color:#cbd5e1;
             font-size:18px;
-
         }
-
         input[type="file"]{
-
             width:100%;
             padding:14px;
             border:none;
@@ -167,507 +90,221 @@
             background:#1e293b;
             color:white;
             cursor:pointer;
-
         }
-
         .analyze-btn{
-
             width:100%;
             margin-top:25px;
             padding:18px;
-
             border:none;
-
             border-radius:15px;
-
-            background:
-            linear-gradient(to right,
-            #2563eb,
-            #ff00ff);
-
+            background: linear-gradient(to right, #2563eb, #ff00ff);
             color:white;
-
             font-size:22px;
-
             cursor:pointer;
-
             transition:0.3s;
-
         }
-
         .analyze-btn:hover{
-
             transform:scale(1.03);
-
-            box-shadow:
-            0px 0px 25px #ff00ff;
-
+            box-shadow: 0px 0px 25px #ff00ff;
         }
-
         /* CENTER PANEL */
-
         .center-panel{
-
             background:#081120;
-
             border-radius:25px;
-
             padding:30px;
-
-            border:
-            1px solid rgba(255,255,255,0.08);
-
+            border: 1px solid rgba(255,255,255,0.08);
         }
-
         .analysis-title{
-
             text-align:center;
             font-size:42px;
             margin-bottom:30px;
-
         }
-
         .analysis-content{
-
             display:grid;
             grid-template-columns:1fr 320px;
             gap:25px;
-
         }
-
         .image-box{
-
             position:relative;
-
+            text-align: center;
         }
-
         .image-box img{
-
             width:100%;
             border-radius:25px;
-
-            border:
-            3px solid #ff00ff;
-
-            box-shadow:
-            0px 0px 25px #ff00ff55;
-
+            border: 3px solid #ff00ff;
+            box-shadow: 0px 0px 25px #ff00ff55;
             animation:glow 2s infinite alternate;
-
         }
-
         @keyframes glow{
-
-            from{
-                box-shadow:
-                0px 0px 15px #ff00ff55;
-            }
-
-            to{
-                box-shadow:
-                0px 0px 30px #00c6ff;
-            }
-
+            from{ box-shadow: 0px 0px 15px #ff00ff55; }
+            to{ box-shadow: 0px 0px 30px #00c6ff; }
         }
-
-        /* DETAILS */
-
+        /* DETAILS CARDS */
         .details{
-
             display:flex;
             flex-direction:column;
             gap:20px;
-
         }
-
         .card{
-
             background:#0f172a;
-
             border-radius:20px;
-
             padding:25px;
-
-            border:
-            1px solid rgba(255,255,255,0.08);
-
+            border: 1px solid rgba(255,255,255,0.08);
             display:flex;
             align-items:center;
             gap:20px;
-
             transition:0.3s;
-
         }
-
         .card:hover{
-
             transform:translateY(-5px);
-
-            box-shadow:
-            0px 0px 20px rgba(255,0,255,0.3);
-
+            box-shadow: 0px 0px 20px rgba(255,0,255,0.3);
         }
+        .card i{ font-size:40px; }
+        .age-icon{ color:#8b5cf6; }
+        .gender-icon{ color:#00ff99; }
+        .emotion-icon{ color:#ffd000; }
+        .card-text h3{ font-size:22px; margin-bottom:8px; }
+        .card-text p{ font-size:36px; font-weight:bold; }
 
-        .card i{
-
-            font-size:40px;
-
-        }
-
-        .age-icon{
-            color:#8b5cf6;
-        }
-
-        .gender-icon{
-            color:#00ff99;
-        }
-
-        .emotion-icon{
-            color:#ffd000;
-        }
-
-        .card-text h3{
-
-            font-size:22px;
-            margin-bottom:8px;
-
-        }
-
-        .card-text p{
-
-            font-size:36px;
-            font-weight:bold;
-
-        }
-
-        /* MOBILE MOCKUP */
-
+        /* MOBILE PANEL */
         .mobile-panel{
-
             background:#081120;
-
             border-radius:45px;
-
             padding:25px 18px;
-
             border:5px solid #1e293b;
-
             height:700px;
-
-            box-shadow:
-            0px 0px 25px rgba(0,0,0,0.5);
-
+            box-shadow: 0px 0px 25px rgba(0,0,0,0.5);
         }
-
         .mobile-title{
-
             text-align:center;
             margin-bottom:20px;
-
             font-size:26px;
-
-            background:
-            linear-gradient(to right,
-            #00c6ff,
-            #ff00ff);
-
+            background: linear-gradient(to right, #00c6ff, #ff00ff);
             -webkit-background-clip:text;
             -webkit-text-fill-color:transparent;
-
         }
-
         .mobile-image img{
-
             width:100%;
             border-radius:20px;
-
-            border:
-            2px solid #ff00ff;
-
+            border: 2px solid #ff00ff;
         }
-
         .mobile-card{
-
             margin-top:15px;
-
             background:#0f172a;
-
             border-radius:15px;
-
             padding:15px;
-
             display:flex;
             justify-content:space-between;
             align-items:center;
-
-            border:
-            1px solid rgba(255,255,255,0.08);
-
+            border: 1px solid rgba(255,255,255,0.08);
         }
-
-        /* FOOTER */
-
         .footer{
-
             text-align:center;
             padding:25px;
             margin-top:30px;
-
             color:#94a3b8;
-
             font-size:18px;
-
         }
 
         /* RESPONSIVE */
-
         @media(max-width:1200px){
-
-            .main-grid{
-
-                grid-template-columns:1fr;
-
-            }
-
-            .mobile-panel{
-
-                display:none;
-
-            }
-
+            .main-grid{ grid-template-columns:1fr; }
+            .mobile-panel{ display:none; }
         }
-
         @media(max-width:768px){
-
-            .analysis-content{
-
-                grid-template-columns:1fr;
-
-            }
-
-            .logo{
-
-                font-size:32px;
-
-            }
-
-            .card-text p{
-
-                font-size:28px;
-
-            }
-
+            .analysis-content{ grid-template-columns:1fr; }
+            .logo{ font-size:32px; }
+            .card-text p{ font-size:28px; }
         }
-
     </style>
-
 </head>
-
 <body>
 
-    <!-- NAVBAR -->
-
     <div class="navbar">
-
-        <div class="logo">
-            AI FACE ANALYZER
-        </div>
-
+        <div class="logo">AI FACE ANALYZER</div>
     </div>
-
-    <!-- MAIN -->
 
     <div class="container">
-
         <div class="main-grid">
-
-            <!-- LEFT PANEL -->
-
+            
             <div class="left-panel">
-
-                <h2 class="panel-title">
-                    UPLOAD IMAGE
-                </h2>
-
-                <form method="POST"
-                enctype="multipart/form-data">
-
+                <h2 class="panel-title">UPLOAD IMAGE</h2>
+                <form method="POST" enctype="multipart/form-data">
                     <div class="upload-box">
-
                         <i class="fa-solid fa-cloud-arrow-up"></i>
-
-                        <p>
-                            Drag & Drop your image here
-                        </p>
-
-                        <input type="file"
-                        name="image"
-                        required>
-
+                        <p>Drag & Drop your image here</p>
+                        <input type="file" name="image" required>
                     </div>
-
-                    <button type="submit"
-                    class="analyze-btn">
-
-                        Analyze Face
-
-                    </button>
-
+                    <button type="submit" class="analyze-btn">Analyze Face</button>
                 </form>
-
             </div>
-
-            <!-- CENTER PANEL -->
 
             <div class="center-panel">
-
-                <h2 class="analysis-title">
-                    ANALYSIS RESULT
-                </h2>
+                <h2 class="analysis-title">ANALYSIS RESULT</h2>
 
                 {% if result %}
-
                 <div class="analysis-content">
-
-                    <!-- IMAGE -->
-
                     <div class="image-box">
-
-                        <img src="{{ image_path }}">
-
+                        <img src="{{ url_for('static', filename='uploads/' + image_path) }}">
                     </div>
-
-                    <!-- DETAILS -->
 
                     <div class="details">
-
-                        <!-- AGE -->
-
                         <div class="card">
-
                             <i class="fa-solid fa-calendar-days age-icon"></i>
-
                             <div class="card-text">
-
                                 <h3>Detected Age</h3>
-
                                 <p>{{ result.age }}</p>
-
                             </div>
-
                         </div>
 
-                        <!-- GENDER -->
-
                         <div class="card">
-
                             <i class="fa-solid fa-user gender-icon"></i>
-
                             <div class="card-text">
-
                                 <h3>Gender Type</h3>
-
                                 <p>{{ result.gender }}</p>
-
                             </div>
-
                         </div>
-
-                        <!-- EMOTION -->
 
                         <div class="card">
-
                             <i class="fa-regular fa-face-smile emotion-icon"></i>
-
                             <div class="card-text">
-
                                 <h3>Emotion</h3>
-
                                 <p>{{ result.emotion }}</p>
-
                             </div>
-
                         </div>
-
                     </div>
-
                 </div>
-
                 {% else %}
-
-                <div style="
-                text-align:center;
-                padding:120px 0;
-                color:#94a3b8;
-                font-size:24px;">
-
+                <div style="text-align:center; padding:120px 0; color:#94a3b8; font-size:24px;">
                     Upload image to see result
-
                 </div>
-
                 {% endif %}
-
             </div>
 
-            <!-- MOBILE MOCKUP -->
-
             <div class="mobile-panel">
-
-                <div class="mobile-title">
-
-                    AI FACE ANALYZER
-
-                </div>
-
+                <div class="mobile-title">AI FACE ANALYZER</div>
                 {% if result %}
-
                 <div class="mobile-image">
-
-                    <img src="{{ image_path }}">
-
+                    <img src="{{ url_for('static', filename='uploads/' + image_path) }}">
                 </div>
-
                 <div class="mobile-card">
-
-                    <span>Age</span>
-
-                    <strong>{{ result.age }}</strong>
-
+                    <span>Age</span><strong>{{ result.age }}</strong>
                 </div>
-
                 <div class="mobile-card">
-
-                    <span>Gender</span>
-
-                    <strong>{{ result.gender }}</strong>
-
+                    <span>Gender</span><strong>{{ result.gender }}</strong>
                 </div>
-
                 <div class="mobile-card">
-
-                    <span>Emotion</span>
-
-                    <strong>{{ result.emotion }}</strong>
-
+                    <span>Emotion</span><strong>{{ result.emotion }}</strong>
                 </div>
-
                 {% endif %}
-
             </div>
 
         </div>
-
     </div>
 
-    <!-- FOOTER -->
-
     <div class="footer">
-
-        © 2025 AI Face Analyzer |
-        Powered by DeepFace AI
-
+        © 2026 AI Face Analyzer | Powered by DeepFace AI
     </div>
 
 </body>
-
 </html>
